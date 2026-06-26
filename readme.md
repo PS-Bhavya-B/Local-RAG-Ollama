@@ -1,71 +1,103 @@
-<h1>Build a local RAG with Ollama</h1>
+# Local RAG Chatbot with Ollama, LangChain & BrightData
 
-<h2>Watch the full tutorial on my YouTube Channel</h2>
-<div>
+## Overview
 
-<a href="https://youtu.be/c5jHhMXmXyo">
-    <img src="thumbnail_small.png" alt="Thomas Janssen Youtube" width="200"/>
-</a>
-</div>
+This project implements a **Retrieval-Augmented Generation (RAG) chatbot** using LangChain, Ollama, and ChromaDB.
 
-<h2>Prerequisites</h2>
-<ul>
-  <li>Python 3.11+</li>
-</ul>
+The system is designed to:
+- Collect data using BrightData API
+- Process and convert text into embeddings
+- Store embeddings in a vector database
+- Retrieve relevant information based on user queries
+- Generate accurate responses using a local Large Language Model (LLM)
 
-<h2>Installation</h2>
-<h3>1. Clone the repository:</h3>
+The chatbot runs **locally without relying on external LLM APIs**, making it efficient, private, and cost-effective.
 
-```
-git clone https://github.com/ThomasJanssen-tech/Local-RAG-with-Ollama
-cd Local-RAG-With-Ollama
-```
+---
 
-<h3>2. Create a virtual environment</h3>
+## Project Context
 
-```
+This project was developed as part of a learning exercise to understand modern AI systems such as RAG pipelines.
+
+The implementation is inspired by online tutorials and extended with:
+- Local LLM execution using Ollama
+- Vector database integration using ChromaDB
+- Automated data ingestion using BrightData API
+- Error handling and offline execution improvements
+
+---
+
+## Features
+
+- Automated data ingestion using BrightData API
+- Local embeddings using `mxbai-embed-large`
+- Vector search using ChromaDB
+- Local LLM using Ollama (`llama3`)
+- Retrieval-Augmented Generation pipeline
+- Streamlit chatbot interface
+- Works offline after dataset generation
+
+---
+
+## Tech Stack
+
+- Python
+- LangChain
+- Ollama (LLM + Embeddings)
+- ChromaDB
+- BrightData API
+- Streamlit
+
+---
+
+## Workflow
+
+1. Collect data using BrightData API
+2. Store raw data in dataset file
+3. Split text into smaller chunks
+4. Convert chunks into embeddings using Ollama
+5. Store embeddings in ChromaDB
+6. Convert user query into embedding
+7. Retrieve most relevant chunks using similarity search
+8. Generate response using local LLM
+
+
+## Setup Instructions
+
+### 1. Clone the repository
+ 5```bash
+ git clone https://github.com/PS-Bhavya-B/Local-RAG-Ollama.git7
+ cd Local-RAG-Ollama
+
+### 2. Create virtual environment
 python -m venv venv
-```
+venv\Scripts\activate
 
-<h3>3. Activate the virtual environment</h3>
-
-```
-venv\Scripts\Activate
-(or on Mac): source venv/bin/activate
-```
-
-<h3>4. Install libraries</h3>
-
-```
+### 3. Install dependencies
 pip install -r requirements.txt
-```
 
-<h3>5. Add Bright Data API Key</h3>
-<ul>
-<li>Get your $15 Bright Data credits: https://brdta.com/tomstechacademy</li>
-<li>Rename the .env.example file to .env</li>
-<li>Add your Bright Data API key</li>
-<li><i>If you want to use ChatGPT or Anthropic models, add an API key (not required for Ollama)</i></li>
-</ul>
+### 4. Setup environment variables
+EMBEDDING_MODEL=mxbai-embed-large
+CHAT_MODEL=llama3.2:3b
+MODEL_PROVIDER=ollama
 
-<h2>Executing the scripts</h2>
+DATABASE_LOCATION=chroma_db
+COLLECTION_NAME=rag_data
+DATASET_STORAGE_FOLDER=datasets/
 
-- Open a terminal in VS Code
+BRIGHTDATA_API_KEY=your_key_here
+SNAPSHOT_STORAGE_FILE=snapshot.txt
 
-- Execute the following command:
+### 5. Install Ollama models
+ollama pull llama3.2:3b2
+ollama pull mxbai-embed-large
 
-```
-python run 1_scraping_wikipedia.py
-python run 2_chunking_embedding_ingestion.py
-streamlit run 3_chatbot.py
-```
+### 6. Run data scraping 
+python 1_scraping_wikipedia.pyShow more lines
 
-<h2>Further reading</h2>
-<ul>
-<li>https://www.ibm.com/think/topics/vector-embedding</li>
-<li>https://ollama.com/blog/embedding-models</li>
-<li>https://python.langchain.com/docs/integrations/vectorstores/chroma/</li>
-<li>https://python.langchain.com/docs/integrations/text_embedding/ollama/</li>
-<li>https://ollama.com/library/mxbai-embed-large</li>
-<li>https://ollama.com/library/qwen3</li>
-</ul>
+### 7. Generate embeddings
+python 2_chunking_embedding_ingestion.py2
+
+### 8. Run chatbot
+streamlit run 3_chatbot.pyShow more lines
+
