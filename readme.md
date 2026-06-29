@@ -65,7 +65,6 @@ The implementation is inspired by online tutorials and extended with:
 ## Setup Instructions
 
 ### 1. Clone the repository
- ```bash
  git clone https://github.com/PS-Bhavya-B/Local-RAG-Ollama.git
  cd Local-RAG-Ollama
 
