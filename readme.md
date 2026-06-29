@@ -99,5 +99,5 @@ python 1_scraping_wikipedia.pyShow more lines
 python 2_chunking_embedding_ingestion.py2
 
 ### 8. Run chatbot
-streamlit run 3_chatbot.pyShow more lines
+streamlit run 3_chatbot.py
 
